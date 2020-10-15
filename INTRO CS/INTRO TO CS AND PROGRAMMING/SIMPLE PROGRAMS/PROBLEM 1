@@ -1,0 +1,15 @@
+#Write a program to calculate the credit card balance after one year if a person only pays the minimum monthly payment required by the credit card company each month.
+
+balance = 5000
+annualInterestRate = 0.18
+monthlyInterestRate = annualInterestRate / 12
+monthlyPaymentRate = 0.02
+
+def CalculateDebt(balance, t):
+ for money in range (t):
+   monthlyPayment = monthlyPaymentRate * balance
+   balance = balance - monthlyPayment
+   balance = balance + (balance * monthlyInterestRate)
+ return balance
+
+print(round((CalculateDebt(balance, 12)), 2))
