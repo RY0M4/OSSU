@@ -1,0 +1,23 @@
+#Implement the function getGuessedWord that takes in two parameters - a string, secretWord, and a list of letters, lettersGuessed.
+#This function returns a string that is comprised of letters and underscores, based on what letters in lettersGuessed are in secretWord.
+
+secretWord = 'apple' 
+lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
+
+def getGuessedWord(secretWord, lettersGuessed):
+    lettersGuessedInSecretWord = ''
+    guessedWord = ''
+    for letter in secretWord:
+        if letter in lettersGuessed[:-1]:
+            lettersGuessedInSecretWord += letter
+        else:
+            continue
+    for letter in secretWord:
+        if letter in lettersGuessedInSecretWord:
+            guessedWord += letter
+        else:
+            guessedWord += '_'
+    return guessedWord
+            
+
+print(getGuessedWord(secretWord, lettersGuessed))
