@@ -4,11 +4,10 @@
 secretWord = 'apple' 
 lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
 
-
 def isWordGuessed(secretWord, lettersGuessed):
     lettersGuessedInSecretWord = ''
-    for letter in lettersGuessed[:-1]:
-        if letter in secretWord:
+    for letter in secretWord:
+        if letter in lettersGuessed[:-1]:
             lettersGuessedInSecretWord += letter
         else:
             continue
@@ -16,5 +15,5 @@ def isWordGuessed(secretWord, lettersGuessed):
         return True
     else:
         return False
-     
+
 print(isWordGuessed(secretWord, lettersGuessed))
