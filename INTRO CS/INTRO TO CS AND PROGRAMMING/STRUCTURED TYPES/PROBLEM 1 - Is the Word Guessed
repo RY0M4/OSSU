@@ -7,7 +7,7 @@ lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
 def isWordGuessed(secretWord, lettersGuessed):
     lettersGuessedInSecretWord = ''
     for letter in secretWord:
-        if letter in lettersGuessed[:-1]:
+        if letter in lettersGuessed:
             lettersGuessedInSecretWord += letter
         else:
             continue
