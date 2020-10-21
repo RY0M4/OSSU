@@ -8,7 +8,7 @@ def getGuessedWord(secretWord, lettersGuessed):
     lettersGuessedInSecretWord = ''
     guessedWord = ''
     for letter in secretWord:
-        if letter in lettersGuessed[:-1]:
+        if letter in lettersGuessed:
             lettersGuessedInSecretWord += letter
         else:
             continue
