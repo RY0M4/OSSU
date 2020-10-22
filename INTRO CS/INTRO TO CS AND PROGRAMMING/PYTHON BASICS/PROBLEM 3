@@ -2,9 +2,9 @@
 #Write a program that prints the longest substring of s in which the letters occur in alphabetical order.
 
 s = 'azcbobobegghakl'
+
 current=s[0]
 longest=s[0]
-
 for letter in s[1:]:
  if len(current) > len(longest):
   longest = current
