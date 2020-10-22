@@ -1,9 +1,10 @@
 #Assume s is a string of lower case characters.
 #Write a program that prints the number of times the string 'bob' occurs in s.
+
 s = 'azcbobobegghakl'
 word = 'bob'
-wordCount = 0
 
+wordCount = 0
 for letter in range(len(s)):
  if s[letter:letter+3] == word:
   wordCount += 1
