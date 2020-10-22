@@ -72,5 +72,3 @@ def hangman(secretWord):
           return print('Sorry, you ran out of guesses. The word was ' + secretWord)
 
 print(hangman(secretWord))
-    
-    
