@@ -1,0 +1,17 @@
+#When dividing by 0, fancy_divide should return a list with all 0 elements.
+
+def fancy_divide(list_of_numbers, index):
+   try:
+    denom = list_of_numbers[index]
+    return [simple_divide(item, denom) for item in list_of_numbers]
+   #This is an additional piece of code (since it wasn't requested by the exercise) that deals with an IndexError.
+   except IndexError:
+    return fancy_divide(list_of_numbers, index - 1)
+
+def simple_divide(item, denom):
+   try:
+    return item / denom
+   except ZeroDivisionError:
+    return 0
+    
+print(fancy_divide([0, 2, 4], 0))
