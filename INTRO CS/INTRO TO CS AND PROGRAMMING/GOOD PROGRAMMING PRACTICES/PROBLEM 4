@@ -1,0 +1,14 @@
+#Implement the helper calculateHandlen function.
+
+def calculateHandlen(hand):
+    len = 0
+    for letter in hand.keys():
+     while hand[letter] > 0:
+        if hand[letter] > 0:
+            len += 1
+            hand[letter] -= 1
+        else:
+            continue
+    return len
+    
+print(calculateHandlen({'r': 1, 'e': 1, 'u': 1, 'p': 2, 'a': 3, 't': 1}))
