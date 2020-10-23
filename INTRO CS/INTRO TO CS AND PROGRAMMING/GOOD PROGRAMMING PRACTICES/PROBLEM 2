@@ -1,0 +1,12 @@
+#Implement the function updateHand, which takes in two inputs - a hand and a word (string). 
+#updateHand uses letters from the hand to spell the word, and then returns a copy of the hand, containing only the letters remaining.
+#Make sure this function has no side effects: i.e., it must not mutate the hand passed in.
+
+def updateHand(hand, word):
+    copy = hand.copy()
+    for letter in word:
+        if letter in copy.keys():
+            copy[letter] -= 1
+    return copy
+
+print(updateHand({'a':1, 'q':1, 'l':2, 'm':1, 'u':1, 'i':1}, 'quail'))
