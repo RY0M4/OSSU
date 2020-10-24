@@ -1,0 +1,215 @@
+#Write code that re-implements the playGame function.
+#You need to give the computer the option to choose a word and to play. 
+
+import random
+
+VOWELS = 'aeiou'
+CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
+
+# HAND_SIZE
+n = 7
+
+SCRABBLE_LETTER_VALUES = {
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+}
+
+WORDLIST_FILENAME = "words.txt"
+
+def loadWords():
+    print("Loading word list from file...")
+    # inFile: file
+    inFile = open(WORDLIST_FILENAME, 'r')
+    # wordList: list of strings
+    wordList = []
+    for line in inFile:
+        wordList.append(line.strip().lower())
+    print("  ", len(wordList), "words loaded.")
+    return wordList
+
+def getFrequencyDict(sequence):
+    # freqs: dictionary (element_type -> int)
+    freq = {}
+    for x in sequence:
+        freq[x] = freq.get(x,0) + 1
+    return freq
+	
+def getWordScore(word, n):
+    score = 0
+    for letter in word:
+        if letter in SCRABBLE_LETTER_VALUES:
+            score += SCRABBLE_LETTER_VALUES[letter]
+    score *= len(word)
+    if len(word) == n:
+        score += 50
+    return score
+
+def displayHand(hand):
+    for letter in hand.keys():
+        for j in range(hand[letter]):
+             print(letter,end=" ")       
+    print() 
+
+def dealHand(n):
+    hand={}
+    numVowels = n // 3
+    for i in range(numVowels):
+        x = VOWELS[random.randrange(0,len(VOWELS))]
+        hand[x] = hand.get(x, 0) + 1
+    for i in range(numVowels, n):    
+        x = CONSONANTS[random.randrange(0,len(CONSONANTS))]
+        hand[x] = hand.get(x, 0) + 1
+    return hand
+
+def updateHand(hand, word):
+    copy = hand.copy()
+    for letter in word:
+        if letter in copy.keys():
+            copy[letter] -= 1
+    return copy
+
+def isValidWord(word, hand, wordList):
+    copy = hand.copy()
+    for letter in word:
+        if letter in copy.keys():
+            if copy[letter] > 0:
+             copy[letter] -= 1
+             continue
+            else:
+             return False    
+        else:
+            return False
+    if word in wordList:
+        return True
+    else:
+        return False
+
+def calculateHandlen(hand):
+    copy = hand.copy()
+    len = 0
+    for letter in copy.keys():
+     while copy[letter] > 0:
+        if copy[letter] > 0:
+            len += 1
+            copy[letter] -= 1
+        else:
+            continue
+    return len
+
+wordList = loadWords()
+
+def playHand(hand, wordList, n):
+    # assigning local variables to avoid errors
+    word = ''
+    score = 0
+    # the game ends when the user runs out of letters
+    while calculateHandlen(hand) > 0:   
+     # display hand
+     print("Current Hand:", end=' '), displayHand(hand)
+     # let the player input a word (or "." to indicate that they're done playing)
+     word = input("Enter word, or a '.' to indicate that you are finished: ")
+     if word == ".":
+      print("Goodbye!" + " Total score: " + str(score))
+      return
+     # check if the word is legit
+     elif isValidWord(word, hand, wordList) == True:
+      # if the word is valid then remove the used up letters from the hand
+      hand = updateHand(hand, word)
+      # display the score of the word and the remaining letters in the hand
+      newScore = getWordScore(word, n)
+      score += newScore
+      print(word + " earned " + str(newScore) + " points." + " Total: " + str(score))
+     elif isValidWord(word, hand, wordList) == False:
+      print("Invalid word, please try again.")
+    # display the total score when the user runs out of letters 
+    print("Run out of letters." + " Total score: " + str(score))
+    
+def compChooseWord(hand, wordList, n):
+    # Create a new variable to store the maximum score seen so far (initially 0)
+    bestScore = 0
+    # Create a new variable to store the best word seen so far (initially None)  
+    bestWord = None
+    # For each word in the wordList
+    for word in wordList:
+        # If you can construct the word from your hand
+        if isValidWord(word, hand, wordList):
+            # find out how much making that word is worth
+            score = getWordScore(word, n)
+            # If the score for that word is higher than your best score
+            if (score > bestScore):
+                # update your best score, and best word accordingly
+                bestScore = score
+                bestWord = word
+    # return the best word you found.
+    return bestWord
+
+def compPlayHand(hand, wordList, n):
+    # Keep track of the total score
+    totalScore = 0
+    # As long as there are still letters left in the hand:
+    while (calculateHandlen(hand) > 0) :
+        # Display the hand
+        print("Current Hand: ", end=' ')
+        displayHand(hand)
+        # computer's word
+        word = compChooseWord(hand, wordList, n)
+        # If the input is a single period:
+        if word == None:
+            # End the game (break out of the loop)
+            break
+        # Otherwise (the input is not a single period):
+        else :
+            # If the word is not valid:
+            if (not isValidWord(word, hand, wordList)) :
+                print('This is a terrible error! I need to check my own code!')
+                break
+            # Otherwise (the word is valid):
+            else :
+                # Tell the user how many points the word earned, and the updated total score 
+                score = getWordScore(word, n)
+                totalScore += score
+                print('"' + word + '" earned ' + str(score) + ' points. Total: ' + str(totalScore) + ' points')              
+                # Update hand and show the updated hand to the user
+                hand = updateHand(hand, word)
+                print()
+    # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    print('Total score: ' + str(totalScore) + ' points.')
+    
+def playGame(wordList):
+    previousHand = {}
+    count = 0
+    on = True
+    while on == True:
+     word = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")  
+     if word == "n":
+        count += 1
+        hand = dealHand(n)
+        previousHand = hand
+        choice = ""
+        while choice != "u" and choice != "c":
+         choice = input("Enter u to have yourself play, c to have the computer play: ")
+         if choice == "u": 
+          playHand(hand, wordList, n)
+         elif choice == "c":
+          compPlayHand(hand, wordList, n)
+         else:
+          print("Invalid command.")
+     elif word == "r":
+        if count > 0:
+            hand = previousHand
+            choice = ""
+            while choice != "u" and choice != "c":
+             choice = input("Enter u to have yourself play, c to have the computer play: ")
+             if choice == "u":
+              playHand(hand, wordList, n)
+             elif choice == "c":
+              compPlayHand(hand, wordList, n)
+             else:
+              print("Invalid command.")
+        else:
+            print("You have not played a hand yet. Please play a new hand first!")
+     elif word == "e":
+        return
+     else:
+        print("Invalid command.")
+    
+print(playGame(wordList))
