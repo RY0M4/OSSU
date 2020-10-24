@@ -1,0 +1,98 @@
+#Implement a function that allows the user to play a given hand
+
+SCRABBLE_LETTER_VALUES = {
+    'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+}
+
+WORDLIST_FILENAME = "words.txt"
+
+def loadWords():
+    print("Loading word list from file...")
+    # inFile: file
+    inFile = open(WORDLIST_FILENAME, 'r')
+    # wordList: list of strings
+    wordList = []
+    for line in inFile:
+        wordList.append(line.strip().lower())
+    print("  ", len(wordList), "words loaded.")
+    return wordList
+
+def getWordScore(word, n):
+    score = 0
+    for letter in word:
+        if letter in SCRABBLE_LETTER_VALUES:
+            score += SCRABBLE_LETTER_VALUES[letter]
+    score *= len(word)
+    if len(word) == n:
+        score += 50
+    return score
+
+def displayHand(hand):
+    for letter in hand.keys():
+        for j in range(hand[letter]):
+             print(letter,end=" ")       
+    print() 
+
+def updateHand(hand, word):
+    copy = hand.copy()
+    for letter in word:
+        if letter in copy.keys():
+            copy[letter] -= 1
+    return copy
+
+def isValidWord(word, hand, wordList):
+    copy = hand.copy()
+    for letter in word:
+        if letter in copy.keys():
+            if copy[letter] > 0:
+             copy[letter] -= 1
+             continue
+            else:
+             return False    
+        else:
+            return False
+    if word in wordList:
+        return True
+    else:
+        return False
+
+def calculateHandlen(hand):
+    copy = hand.copy()
+    len = 0
+    for letter in copy.keys():
+     while copy[letter] > 0:
+        if copy[letter] > 0:
+            len += 1
+            copy[letter] -= 1
+        else:
+            continue
+    return len
+
+wordList = loadWords()
+
+def playHand(hand, wordList, n):
+    # assigning local variables to avoid errors
+    word = ''
+    score = 0
+    # the game ends when the user runs out of letters
+    while calculateHandlen(hand) > 0:   
+     # display hand
+     print("Current Hand:", end=' '), displayHand(hand)
+     # let the player input a word (or "." to indicate that they're done playing)
+     word = input("Enter word, or a '.' to indicate that you are finished: ")
+     if word == ".":
+      return "Goodbye!" + " Total score: " + str(score)
+     # check if the word is legit
+     elif isValidWord(word, hand, wordList) == True:
+      # if the word is valid then remove the used up letters from the hand
+      hand = updateHand(hand, word)
+      # display the score of the word and the remaining letters in the hand
+      newScore = getWordScore(word, n)
+      score += newScore
+      print(word + " earned " + str(newScore) + " points." + " Total: " + str(score))
+     elif isValidWord(word, hand, wordList) == False:
+      print("Invalid word, please try again.")
+    # display the total score when the user runs out of letters 
+    print("Run out of letters." + " Total score: " + str(score))
+    
+print(playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7))
