@@ -81,7 +81,8 @@ def playHand(hand, wordList, n):
      # let the player input a word (or "." to indicate that they're done playing)
      word = input("Enter word, or a '.' to indicate that you are finished: ")
      if word == ".":
-      return "Goodbye!" + " Total score: " + str(score)
+      print("Goodbye!" + " Total score: " + str(score))
+      return
      # check if the word is legit
      elif isValidWord(word, hand, wordList) == True:
       # if the word is valid then remove the used up letters from the hand
