@@ -1,0 +1,18 @@
+#Write a generator genPrimes that returns the sequence of prime numbers on successive calls to its next() method.
+
+def genPrimes():
+    p = [2]
+    x = 2
+    yield 2
+    while True:
+        x += 1
+        for number in range(len(p)):
+            if x % p[number] == 0:
+                break
+        else:    
+         p.append(x)
+         yield x
+ 
+primesGenerator = genPrimes()
+while True:
+    print(primesGenerator.__next__())
