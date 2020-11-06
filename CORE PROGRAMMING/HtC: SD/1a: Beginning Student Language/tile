@@ -1,0 +1,8 @@
+# Use the DrRacket square, beside and above functions to create an image.
+
+(require 2htdp/image)
+
+(above (beside (square 40 "solid" "blue")
+        (square 40 "solid" "yellow"))
+       (beside (square 40 "solid" "yellow")
+        (square 40 "solid" "blue")))
