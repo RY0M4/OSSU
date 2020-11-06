@@ -1,6 +1,6 @@
-#x: a non-negative integer argument
-#a: a positive integer argument
-#returns: integer, the integer division of x divided by a.
+# x: a non-negative integer argument
+# a: a positive integer argument
+# returns: integer, the integer division of x divided by a.
 
 def integerDivision(x, a):
     count = 0
