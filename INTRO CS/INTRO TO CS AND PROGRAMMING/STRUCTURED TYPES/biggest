@@ -1,0 +1,11 @@
+# Write a procedure, called biggest, which returns the key corresponding to the entry with the largest number of values associated with it.
+
+def biggest(aDict):
+    '''
+    aDict: A dictionary, where all the values are lists.
+
+    returns: The key with the largest number of values associated with it
+    '''
+    return(max(aDict))
+    
+print(biggest({'b': [1, 7, 5, 4, 3, 18, 10, 0], 'a': []}))
