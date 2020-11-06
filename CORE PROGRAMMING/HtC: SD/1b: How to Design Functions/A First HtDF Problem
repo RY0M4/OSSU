@@ -1,0 +1,22 @@
+; Design a function that pluralizes a given word.
+; For simplicity you may assume that just adding s is enough to pluralize a word.
+
+; Signature, purpose and stub.
+; Define examples, wrap each in check-expect.
+; Template and inventory.
+; Code the function body.
+; Test and debug until correct
+
+; signature: singular word ---> plural word
+; purpose: to return the plural of a word
+; stub: (define (pluralize word)
+;         (... add letter s))
+
+(check-expect (pluralize "cat") "cats")
+(check-expect (pluralize "dog") "dogs")
+(check-expect (pluralize "bird") "birds")
+
+(define (pluralize word)
+  (string-append word "s"))
+
+(pluralize "turtle")
