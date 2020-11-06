@@ -1,5 +1,5 @@
-#Write code that re-implements the playGame function.
-#You need to give the computer the option to choose a word and to play. 
+# Write code that re-implements the playGame function.
+# You need to give the computer the option to choose a word and to play. 
 
 import random
 
