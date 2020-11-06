@@ -1,4 +1,4 @@
-#When dividing by 0, fancy_divide should return a list with all 0 elements.
+# When dividing by 0, fancy_divide should return a list with all 0 elements.
 
 def fancy_divide(list_of_numbers, index):
    try:
