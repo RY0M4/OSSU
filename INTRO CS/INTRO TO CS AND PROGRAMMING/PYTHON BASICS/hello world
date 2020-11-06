@@ -1,0 +1,4 @@
+# Write a piece of Python code that prints out the hello world string.
+
+var = "hello world"
+print(var)
