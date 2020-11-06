@@ -1,0 +1,44 @@
+# For each of the following questions (which you may assume is evaluated independently of the previous questions, so that testList has the value indicated above), provide an expression using applyToEach, so that after evaluation testList has the indicated value.
+
+'''
+>>> print(testList)
+[1, 4, 8, 9]
+'''
+
+testList = [1, -4, 8, -9]
+
+def applyToEach(L, f):
+    for i in range(len(L)):
+        L[i] = f(L[i])
+
+applyToEach(testList, abs)
+
+print(testList)
+
+'''
+>>> print(testList)
+[2, -3, 9, -8]
+'''
+
+testList = [1, -4, 8, -9]
+
+def AddOne(n):
+ return n + 1
+
+applyToEach(testList, AddOne)
+
+print(testList)
+
+'''
+>>> print testList
+[1, 16, 64, 81]
+'''
+
+testList = [1, -4, 8, -9]
+
+def SquareNum(n):
+ return n**2
+
+applyToEach(testList, SquareNum)
+
+print(testList)
