@@ -1,5 +1,5 @@
-#Implement the function getGuessedWord that takes in two parameters - a string, secretWord, and a list of letters, lettersGuessed.
-#This function returns a string that is comprised of letters and underscores, based on what letters in lettersGuessed are in secretWord.
+# Implement the function getGuessedWord that takes in two parameters - a string, secretWord, and a list of letters, lettersGuessed.
+# This function returns a string that is comprised of letters and underscores, based on what letters in lettersGuessed are in secretWord.
 
 secretWord = 'apple' 
 lettersGuessed = ['e', 'i', 'k', 'p', 'r', 's']
