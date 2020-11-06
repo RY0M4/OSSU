@@ -1,4 +1,4 @@
-#Implement the helper calculateHandlen function.
+# Implement the helper calculateHandlen function.
 
 def calculateHandlen(hand):
     copy = hand.copy()
