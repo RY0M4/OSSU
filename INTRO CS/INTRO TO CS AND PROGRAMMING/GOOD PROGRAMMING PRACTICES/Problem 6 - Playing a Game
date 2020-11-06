@@ -1,5 +1,5 @@
-#Implement the function playGame which completes your word-game program.
-#Keep in mind that a game consists of playing multiple hands.
+# Implement the function playGame which completes your word-game program.
+# Keep in mind that a game consists of playing multiple hands.
 
 import random
 
