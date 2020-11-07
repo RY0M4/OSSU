@@ -1,0 +1,28 @@
+; Use the How to Design Functions (HtDF) recipe to design a function that consumes an image, and appears to put a box around it.
+
+; Signature, purpose and stub.
+; Define examples, wrap each in check-expect.
+; Template and inventory.
+; Code the function body.
+; Test and debug until correct
+
+(require 2htdp/image)
+
+; signature: image -> image
+; purpose: to return an image inside a box
+; stub: (define (boxify (image)) 0)
+
+; template:
+; (define (boxify (image))
+;   (... image1 over image 2))
+
+(define (boxify image)
+  (overlay image (rectangle (+ (image-width image) 10) (+ (image-height image) 10) "outline" "black")))
+
+(boxify (square 50 "solid" "yellow"))
+
+(boxify (rectangle 50 100 "solid" "red"))
+
+(boxify (circle 20 "solid" "blue"))
+
+(boxify (ellipse 60 30 "solid" "pink"))
