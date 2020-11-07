@@ -1,0 +1,26 @@
+; Design a function that consumes a string and determines whether its length is less than 5.
+; Follow the HtDF recipe and leave behind commented out versions of the stub and template.
+
+; Signature, purpose and stub.
+; Define examples, wrap each in check-expect.
+; Template and inventory.
+; Code the function body.
+; Test and debug until correct
+
+; signature: string -> true/false
+; purpose: determine if a string is shorter than 5 characters
+; stub: (define (determine-len string) 0)
+
+(check-expect (determine-len "mazinger") false)
+(check-expect (determine-len "gundam") false)
+(check-expect (determine-len "start") false)
+(check-expect (determine-len "fire") true)
+
+; template:
+; (define (determine-len string)
+;   (... true/false))
+
+(define (determine-len string)
+  (< (string-length string) 5))
+
+(determine-len "onix")
