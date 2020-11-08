@@ -1,0 +1,41 @@
+; Design a function that consumes two images and produces true if the first is larger than the second.
+
+; Signature, purpose and stub.
+; Define examples, wrap each in check-expect.
+; Template and inventory.
+; Code the function body.
+; Test and debug until correct
+
+(require 2htdp/image)
+
+; signature: Image (x2) -> true/false
+; purpose: return true if the first image is larger than the second
+; stub: (define (determine-larger image1 image2) 0)
+
+(check-expect (determine-larger (rectangle 25 75 "solid" "black") (rectangle 25 75 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 50 75 "solid" "black") (rectangle 25 75 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 25 100 "solid" "black") (rectangle 25 75 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 25 75 "solid" "black") (rectangle 50 75 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 25 75 "solid" "black") (rectangle 25 100 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 25 75 "solid" "black") (rectangle 50 100 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 50 100 "solid" "black") (rectangle 25 75 "solid" "black")) true)
+(check-expect (determine-larger (rectangle 75 50 "solid" "black") (rectangle 25 75 "solid" "black")) false)
+(check-expect (determine-larger (rectangle 25 75 "solid" "black") (rectangle 75 50 "solid" "black")) false)
+
+; template:
+; (define (determine-larger image 1 image2)
+;   (... image1 image2)
+
+(define (determine-larger image1 image2)
+  (and (> (image-width image1) (image-width image2))
+       (> (image-height image1) (image-height image2))))
+
+(determine-larger (rectangle 25 75 "solid" "black") (rectangle 25 75 "solid" "black"))
+(determine-larger (rectangle 50 75 "solid" "black") (rectangle 25 75 "solid" "black")) 
+(determine-larger (rectangle 25 100 "solid" "black") (rectangle 25 75 "solid" "black")) 
+(determine-larger (rectangle 25 75 "solid" "black") (rectangle 50 75 "solid" "black")) 
+(determine-larger (rectangle 25 75 "solid" "black") (rectangle 25 100 "solid" "black")) 
+(determine-larger (rectangle 25 75 "solid" "black") (rectangle 50 100 "solid" "black")) 
+(determine-larger (rectangle 50 100 "solid" "black") (rectangle 25 75 "solid" "black")) 
+(determine-larger (rectangle 75 50 "solid" "black") (rectangle 25 75 "solid" "black")) 
+(determine-larger (rectangle 25 75 "solid" "black") (rectangle 75 50 "solid" "black")) 
