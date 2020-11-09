@@ -27,7 +27,7 @@
 (define (fn-for-RocketDescent n)
   (cond [(and (number? n)
               (<= 0 n)
-              (< n 10))
+              (< n 100))
          (... n)]
         [else (...)]))
 
