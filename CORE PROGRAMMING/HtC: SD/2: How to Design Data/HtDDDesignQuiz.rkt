@@ -69,7 +69,7 @@
 
 ; Design a function called months-old that takes a person's age in years and yields that person's age in months.
 
-; signature: MonthAge -> Natural
+; signature: Age -> MonthAge 
 ; purpose: to return the age of a person from years to months
 ; stub: (define (months-old M) 0)
 
