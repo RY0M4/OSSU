@@ -48,6 +48,3 @@
 (chrono-movie movie1 movie2)
 (chrono-movie movie2 movie3)
 (chrono-movie movie3 movie1)
-
-
-
